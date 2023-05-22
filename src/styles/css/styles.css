@@ -1,0 +1,264 @@
+body {
+  background: aliceblue;
+  color: #333333;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+}
+
+.loading-section {
+  width: 90vw;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-block: 2rem;
+  display: grid;
+  height: 90vh;
+  place-items: center;
+}
+.loading-section .desc {
+  text-transform: capitalize;
+  letter-spacing: 0.0625rem;
+  color: rgb(124, 0, 186);
+}
+
+.navbar {
+  background: rgb(124, 0, 186);
+}
+
+.nav-center {
+  width: 90vw;
+  max-width: 46rem;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  color: #fff;
+}
+.nav-center .title-logo {
+  text-transform: capitalize;
+  letter-spacing: 0.0625rem;
+}
+.nav-center .cart-icon {
+  font-size: 2rem;
+}
+.nav-center .cart-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.nav-center .amount-container {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.5rem;
+  background: #c654ff;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.cart-container {
+  width: 90vw;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-block: 2rem;
+}
+.cart-container .title {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.25rem;
+  padding-block: 1.5rem;
+}
+.cart-container .desc {
+  text-align: center;
+  color: rgba(124, 0, 186, 0.7);
+}
+
+.cart-list {
+  padding-block: 1.5rem;
+  display: grid;
+  row-gap: 1.25rem;
+}
+
+.cart-footer {
+  display: grid;
+}
+.cart-footer .hr-line {
+  color: #555;
+}
+.cart-footer .info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  margin-bottom: 3rem;
+}
+.cart-footer .total-text {
+  text-transform: capitalize;
+  letter-spacing: 0.0625rem;
+}
+.cart-footer .total-amount {
+  letter-spacing: 0.0625rem;
+  color: #555;
+}
+.cart-footer .btn-clear {
+  border: 0.0625rem solid brown;
+  background: transparent;
+  color: brown;
+  padding: 0.25rem 1rem;
+  border-radius: 0.125rem;
+  text-transform: capitalize;
+  letter-spacing: 0.0625rem;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  justify-self: center;
+}
+.cart-footer .btn-clear:hover {
+  background: brown;
+  color: #fff;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+.cart-item .phone-img {
+  width: 7.5rem;
+}
+.cart-item .name {
+  color: #555;
+}
+.cart-item .price {
+  color: #555;
+}
+.cart-item .btn-remove {
+  background: none;
+  border: none;
+  color: brown;
+  transition: all 300ms;
+}
+.cart-item .btn-remove:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.cart-item .toggle-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+.cart-item .btn-amount {
+  background: none;
+  border: none;
+  font-size: 1.17rem;
+  color: blueviolet;
+  transition: all 300ms;
+}
+.cart-item .btn-amount:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.modal-overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.modal-container {
+  background: #fff;
+  width: 80vw;
+  height: 30vh;
+  max-width: 31.25rem;
+  margin-inline: auto;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  display: grid;
+  place-items: center;
+}
+.modal-container .modal-content {
+  align-self: end;
+  color: #555;
+}
+.modal-container .btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.modal-container .btn-cancel {
+  border: 0.0625rem solid brown;
+  background: transparent;
+  color: brown;
+  padding: 0.25rem 1rem;
+  border-radius: 0.125rem;
+  text-transform: capitalize;
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  font-size: 0.67rem;
+}
+.modal-container .btn-cancel:hover {
+  background: brown;
+  color: #fff;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.modal-container .btn-confirm {
+  border: 0.0625rem solid green;
+  background: transparent;
+  color: green;
+  padding: 0.25rem 1rem;
+  border-radius: 0.125rem;
+  text-transform: capitalize;
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  font-size: 0.67rem;
+}
+.modal-container .btn-confirm:hover {
+  background: green;
+  color: #fff;
+  cursor: pointer;
+  transition: all 300ms;
+}/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,66 @@
+@use "./functions" as f;
+@use "sass:math";
+
+// **********[ MEDIA QUERY - UP ]**********
+
+// breakpoints-up ____define map of min-width breakpoints using px-rem function
+
+$breakpoints-up: (
+  xx-small: f.px-rem(320),
+  x-small: f.px-rem(425),
+  small: f.px-rem(480),
+  medium: f.px-rem(768),
+  large: f.px-rem(1024),
+  x-large: f.px-rem(1440),
+);
+
+// media-query up ____define mixin which should take $key from breakpoints-up map or any unitless pixel value as argument and return min-width/breakpoint value in rems.
+
+@mixin mq-up($bp) {
+  @if map-has-key($breakpoints-up, $bp) {
+    $min-width: map-get($breakpoints-up, $bp);
+    @media screen and (min-width: $min-width) {
+      @content;
+    }
+  } @else if math.is-unitless($bp) {
+    $min-width: f.px-rem($bp);
+    @media screen and (min-width: $min-width) {
+      @content;
+    }
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}
+
+// **********[ MEDIA QUERY - DOWN ]**********
+
+// breakpoints-down ____define map of max-width breakpoints using px-rem function
+
+// s
+
+$breakpoints-down: (
+  xx-small: f.px-rem(319.99),
+  x-small: f.px-rem(424.98),
+  small: f.px-rem(479.98),
+  medium: f.px-rem(767.98),
+  large: f.px-rem(1023.98),
+  x-large: f.px-rem(1439.98),
+);
+
+// media-query down ____define mixin which should take $key from breakpoints-down map or any unitless pixel value as argument and return max-width/breakpoint value in rems.
+
+@mixin mq-down($bp) {
+  @if map-has-key($breakpoints-down, $bp) {
+    $max-width: map-get($breakpoints-down, $bp);
+    @media screen and (max-width: $max-width) {
+      @content;
+    }
+  } @else if math.is-unitless($bp) {
+    $max-width: f.px-rem($bp);
+    @media screen and (max-width: $max-width) {
+      @content;
+    }
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}

@@ -1,0 +1,42 @@
+@use "../abstracts/" as a;
+@use "sass:math";
+
+// **********[ BACKGROUND BUTTON ]**********
+
+// btn-bg ____define base button mixin with background as argument
+
+@mixin btn-bg($bg-color: a.color(b-gray)) {
+  border: none;
+  background: $bg-color;
+  color: #ffffff;
+  padding: a.p(x-small) a.p(base);
+  border-radius: a.br(small);
+  text-transform: capitalize;
+  letter-spacing: a.ls(base);
+
+  &:hover {
+    background: darken($bg-color, a.$darken);
+    cursor: pointer;
+    transition: all, 300ms;
+  }
+}
+
+// **********[ BORDER BUTTON ]**********
+
+// btn-border ____define base button mixin with border-color as argument
+@mixin btn-br($border-color: a.color(b-gray)) {
+  border: a.px-rem(1) solid $border-color;
+  background: transparent;
+  color: $border-color;
+  padding: a.p(x-small) a.p(base);
+  border-radius: a.br(x-small);
+  text-transform: capitalize;
+  letter-spacing: a.ls(base);
+
+  &:hover {
+    background: $border-color;
+    color: #fff;
+    cursor: pointer;
+    transition: all 300ms;
+  }
+}

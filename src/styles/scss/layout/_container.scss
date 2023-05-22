@@ -1,0 +1,50 @@
+@use "../abstracts" as a;
+
+// **********[ CONTAINER BASE ]**********
+
+// container-base ____define mixin which should take padding-y and padding-x values as arguments. This can be used on top-level/parent elements.
+
+@mixin container-base($py: base, $px: base) {
+  padding: a.p($py) a.p($px);
+}
+// **********[ CONTAINER-Y ]**********
+
+// container-y ____define mixin which should take padding-y value as argument. This can be used on top-level/parent elements.
+
+@mixin container-y($py: base) {
+  padding-block: a.p($py);
+}
+
+// **********[ CONTAINER CENTER ]**********
+
+// container-sizes ____define map of max-width limits using px-rem function and/or in percentage of parent elements. [** pixel values are entered after substracting 16+16 pixels inline padding for container. ex: 736+32 = 768px (a standard screen size of tablets) **]
+
+$container-sizes: (
+  xx-small: a.px-rem(288),
+  x-small: a.px-rem(393),
+  small: a.px-rem(448),
+  medium: a.px-rem(736),
+  large: a.px-rem(992),
+  x-large: a.px-rem(1408),
+  50: 50%,
+  60: 60%,
+  70: 70%,
+  80: 80%,
+  85: 85%,
+  90: 90%,
+  95: 95%,
+  100: 100%,
+);
+
+// container-center ____define mixin which should take container size ($key from container-sizes map or any unitless pixel value) as argument and align container to center.
+
+@mixin container-center($c-size: 100) {
+  @if map-has-key($container-sizes, $c-size) {
+    max-width: map-get($container-sizes, $c-size);
+  } @else if math.is-unitless($c-size) {
+    max-width: a.px-rem($c-size);
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+  margin-inline: auto;
+}

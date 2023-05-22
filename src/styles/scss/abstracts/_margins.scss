@@ -1,0 +1,32 @@
+@use "./functions" as f;
+@use "sass:math";
+
+// base-margin ____define variable
+
+$base-margin: 1rem;
+
+// margin-sizes ____define map using $base-padding variable
+
+$margin-sizes: (
+  x-small: $base-margin * 0.25,
+  small: $base-margin * 0.5,
+  base: $base-margin,
+  medium: $base-margin * 1.5,
+  large: $base-margin * 2,
+  x-large: $base-margin * 3,
+  xx-large: $base-margin * 4,
+);
+
+// margin ____define margin funtion which takes $key from margin-sizes map or any unitless pixel value as argument and returns margin value in rems
+
+@function m($size: base) {
+  @if map-has-key($margin-sizes, $size) {
+    $m-value: map-get($margin-sizes, $size);
+    @return $m-value;
+  } @else if math.is-unitless($size) {
+    $m-value: f.px-rem($size);
+    @return $m-value;
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}

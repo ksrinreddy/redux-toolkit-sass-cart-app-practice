@@ -1,0 +1,99 @@
+// **********[ COLOR VARIABLES ]**********
+
+// main-colors
+$primary-color: #00ccff;
+$secondary-color: #ffa500;
+$bg-body: #fff;
+$bg-lightblue: aliceblue;
+
+// text-colors
+
+$text-dark: #333333;
+$text-white: #fff;
+$link-color: #222;
+
+// alert-colors
+
+$success-color: #002aff;
+$danger-color: #ff0000;
+$warning-color: #ffff00;
+
+// normal-colors
+
+$b-white: #ffffff;
+$b-black: #000000;
+$b-gray: rgb(123, 123, 123);
+
+// **********[ COLOR-SHADE VARIABLES ]**********
+
+// color-shades ____define shade varibles using percentage
+
+$lighten: 5;
+$darken: 10;
+
+// **********[ COLORS AND SHADES MAP ]**********
+
+// colors-map ____define map for base colors and its shades(using lighten and darken sass functions)
+
+$colors: (
+  primary: (
+    base: $primary-color,
+    light: lighten($primary-color, $lighten),
+    dark: darken($primary-color, $darken),
+  ),
+  secondary: (
+    base: $secondary-color,
+    light: lighten($secondary-color, $lighten),
+    dark: darken($secondary-color, $darken),
+  ),
+  success: (
+    base: $success-color,
+    light: lighten($success-color, $lighten),
+    dark: darken($success-color, $darken),
+  ),
+  danger: (
+    base: $danger-color,
+    light: lighten($danger-color, $lighten),
+    dark: darken($danger-color, $darken),
+  ),
+  warning: (
+    base: $warning-color,
+    light: lighten($warning-color, $lighten),
+    dark: darken($warning-color, $darken),
+  ),
+  link: (
+    base: $link-color,
+    light: lighten($link-color, $lighten),
+    dark: darken($link-color, $darken),
+  ),
+  text-dark: (
+    base: $text-dark,
+    light: lighten($text-dark, $lighten),
+  ),
+  text-white: (
+    base: $text-white,
+    dark: lighten($text-white, $darken),
+  ),
+  b-white: (
+    base: $b-white,
+    dark: lighten($b-white, $darken),
+  ),
+  b-black: (
+    base: $b-black,
+    light: lighten($b-black, $lighten),
+  ),
+  b-gray: (
+    base: $b-gray,
+    light: lighten($b-gray, $lighten),
+    dark: darken($b-gray, $darken),
+  ),
+);
+
+// **********[ COLOR AND SHADE FUNCTION ]**********
+
+// color-function ____define function which should take color and shade $keys from map as arguments and return base/shaded color.
+
+@function color($base, $shade: base) {
+  $color: map-get(map-get($colors, $base), $shade);
+  @return $color;
+}

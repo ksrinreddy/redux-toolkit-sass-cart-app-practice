@@ -1,0 +1,33 @@
+@use "./functions" as f;
+@use "sass:math";
+
+// base-padding ____define variable using px-rem function
+
+$base-padding: 1rem;
+
+// padding-sizes ____define map using $base-padding variable
+
+$padding-sizes: (
+  xx-small: $base-padding * 0.1,
+  x-small: $base-padding * 0.25,
+  small: $base-padding * 0.5,
+  base: $base-padding,
+  medium: $base-padding * 1.5,
+  large: $base-padding * 2,
+  x-large: $base-padding * 3,
+  xx-large: $base-padding * 4,
+);
+
+// padding ____define padding funtion which takes $key from padding-sizes map or any unitless pixel value as argument and returns padding value in rems
+
+@function p($size: base) {
+  @if map-has-key($padding-sizes, $size) {
+    $p-value: map-get($padding-sizes, $size);
+    @return $p-value;
+  } @else if math.is-unitless($size) {
+    $p-value: f.px-rem($size);
+    @return $p-value;
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}

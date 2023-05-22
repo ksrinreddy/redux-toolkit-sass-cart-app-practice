@@ -1,0 +1,64 @@
+@use "../abstracts" as a;
+
+// **********[ SECTION BASE ]**********
+
+// section-base ____define mixin which should take padding-y, padding-x values as arguments. This can be used on top-level/parent element of react component.
+
+@mixin section-base($py: base, $px: base) {
+  padding-block: a.p($py);
+  padding-inline: a.p($px);
+}
+
+// **********[ SECTION-Y ]**********
+
+// section-y ____define mixin which should take padding-y value as argument. This can be used on top-level/parent element of react component.
+
+@mixin section-y($py: x-large) {
+  padding-block: a.p($py);
+}
+
+// **********[ SECTION CENTER ]**********
+
+// section-sizes ____define map of max-width limits using px-rem function and/or in view-widths(vw). [** pixel values are entered after substracting 16+16 pixels inline padding for section. ex: 736+32 = 768px (a standard screen size of tablets) **]
+
+$section-sizes: (
+  xx-small: a.px-rem(288),
+  x-small: a.px-rem(393),
+  small: a.px-rem(448),
+  medium: a.px-rem(736),
+  large: a.px-rem(992),
+  x-large: a.px-rem(1408),
+  50: 50vw,
+  60: 60vw,
+  70: 70vw,
+  80: 80vw,
+  90: 90vw,
+  95: 95vw,
+);
+
+// // section-center ____define mixin which should take section-size ($key from section-sizes map or any unitless pixel value) as argument and align section to center.
+
+// @mixin section-center($s-size: large) {
+//   @if map-has-key($section-sizes, $s-size) {
+//     max-width: map-get($section-sizes, $s-size);
+//   } @else if math.is-unitless($s-size) {
+//     max-width: a.px-rem($s-size);
+//   } @else {
+//     @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+//   }
+//   margin-inline: auto;
+// }
+
+// section-center____define mixin which should take section-size ($key from section-sizes map or any unitless pixel value) as argument and align section to center.
+
+@mixin section-center($s-size: large) {
+  width: 90vw;
+  @if map-has-key($section-sizes, $s-size) {
+    max-width: map-get($section-sizes, $s-size);
+  } @else if math.is-unitless($s-size) {
+    max-width: a.px-rem($s-size);
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+  margin-inline: auto;
+}

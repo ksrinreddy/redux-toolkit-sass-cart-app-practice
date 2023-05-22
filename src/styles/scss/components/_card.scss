@@ -1,0 +1,35 @@
+@use "../abstracts/" as a;
+
+// **********[ CARD ]**********
+
+// card-grid ____define mixin which should take background value as argument. And display as grid with 1 coloumn. And add some common styles to card.
+
+@mixin card-grid($background: #fff) {
+  background: $background;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  row-gap: a.g(base);
+  text-align: center;
+  padding: a.p(base);
+  border-radius: a.br(medium);
+  border: a.px-rem(1) solid rgba(#000, 0.1);
+  box-shadow: a.px-rem(0) a.px-rem(0) a.px-rem(1) rgba(#000, 0.1);
+}
+
+// card-grid-2 ____define mixin which should take background value, col-1-width, col-2-width in grid as arguments. And add some common styles to card.
+
+@mixin card-grid-2($background: #fff, $col-1: 1fr, $col-2: 2fr) {
+  background: $background;
+  display: grid;
+  grid-template-columns: $col-1 $col-2;
+  align-items: center;
+  justify-items: start;
+  text-align: start;
+  column-gap: a.g(base);
+  padding: a.p(base);
+  border-radius: a.br(medium);
+  border: a.px-rem(1) solid rgba(#000, 0.1);
+  box-shadow: a.px-rem(0) a.px-rem(0) a.px-rem(1) rgba(#000, 0.1);
+}

@@ -1,0 +1,45 @@
+@use "../abstracts/" as a;
+
+// **********[ MODAL OVERLAY ]**********
+
+// mixin for overlay-modal
+
+@mixin modal-overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(#000, 0.5);
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  //   visibility: hidden;
+}
+
+// .modal-overlay {
+
+//   &.show-modal {
+//     visibility: visible;
+//     z-index: 100;
+//   }
+// }
+
+// **********[ MODAL CONTAINER ]**********
+
+// mixin for modal container
+
+@mixin modal-container {
+  background: #fff;
+  width: 80vw;
+  height: 30vh;
+  max-width: a.px-rem(500);
+  margin-inline: auto;
+  padding: a.p(base);
+  border-radius: a.br(medium);
+  display: grid;
+  place-items: center;
+}
+// .modal-container {
+
+// }

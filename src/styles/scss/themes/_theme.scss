@@ -1,0 +1,11 @@
+// night-theme ____define mixin for dark/night-mode theme
+
+// testing example
+@mixin night-theme {
+  // define colors
+  $bg-color: #000000;
+  $color: #ffffff;
+  // define theme
+  background: $bg-color;
+  color: $color;
+}

@@ -1,0 +1,136 @@
+@use "sass:math";
+@use "sass:map";
+
+// **********[ PX-REM ]**********
+
+// pixel to rem ____define function to convert pixel to rem which should take unitless pixel value as argument
+
+@function px-rem($px-value) {
+  @if math.is-unitless($px-value) {
+    $rem: math.div($px-value, 16) + rem;
+    @return $rem;
+  } @else {
+    @error "please enter pixels value without units";
+  }
+}
+
+// **********[ PX-EM ]**********
+
+// pixel to em ____define function to convert pixel to em which should take unitless pixel value as argument
+
+@function px-em($px-value) {
+  $em: math.div($px-value, 16) + em;
+  @if math.is-unitless($px-value) {
+    @return $em;
+  } @else {
+    @error "please enter pixels value without units";
+  }
+}
+
+// **********[ BORDER RADIUS ]**********
+
+// base border-radius ____define variable
+
+$base-br: 0.0625rem;
+
+// border-radii ____define map using base-border-radius
+
+$border-radii: (
+  base: $base-br,
+  x-small: $base-br * 2,
+  small: $base-br * 3,
+  medium: $base-br * 4,
+  large: $base-br * 8,
+  x-large: $base-br * 12,
+  xx-large: $base-br * 16,
+  rounded: 50%,
+);
+
+// border-radius ____define function which should take $key from border-radii map or any unitless pixel value as argument and return border-radius value in rems.
+
+@function br($size) {
+  @if map-has-key($border-radii, $size) {
+    $border-radius: map-get($border-radii, $size);
+    @return $border-radius;
+  } @else if math.is-unitless($size) {
+    $border-radius: px-rem($size);
+    @return $border-radius;
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}
+
+// **********[ LETTER SPACING ]**********
+
+// base letter-spacing ____define variable in rem
+
+$base-ls: 0.0625rem;
+
+// letter-spacings ____define map using base-letter-spacing
+
+$letter-spacings: (
+  base: $base-ls,
+  x-small: $base-ls * 2,
+  small: $base-ls * 3,
+  medium: $base-ls * 4,
+  large: $base-ls * 5,
+  x-large: $base-ls * 6,
+);
+
+// letter-spacing ____define function which should take $key from letter-spacings map or any unitless pixel value as argument and return letter-spacing value in rems.
+
+@function ls($size) {
+  @if map-has-key($letter-spacings, $size) {
+    $letter-spacing: map-get($letter-spacings, $size);
+    @return $letter-spacing;
+  } @else if math.is-unitless($size) {
+    $letter-spacing: px-rem($size);
+    @return $letter-spacing;
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}
+
+// **********[ GAP ]**********
+
+// base-gap ____define variable in rem
+
+$base-gap: 1rem;
+
+// gap sizes ____define map of gap-sizes using base-gap value
+
+$gap-sizes: (
+  x-small: $base-gap * 0.25,
+  small: $base-gap * 0.5,
+  base: $base-gap,
+  medium: $base-gap * 1.25,
+  large: $base-gap * 1.5,
+  x-large: $base-gap * 2,
+  xx-large: $base-gap * 3,
+);
+
+// grid/flex-gap ____define function which should take $key from $gap-sizes map or any unitless pixel value as argument and return gap value in rems.
+
+@function g($size) {
+  @if map-has-key($gap-sizes, $size) {
+    $gap: map-get($gap-sizes, $size);
+    @return $gap;
+  } @else if math.is-unitless($size) {
+    $gap: px-rem($size);
+    @return $gap;
+  } @else {
+    @error 'Entered argument is not assigned in map, try another. Or it has units, try entering any pixels value without units.';
+  }
+}
+
+// **********[ SET TEXT-COLOR ]**********
+
+// set-text-color ____based on lightness of the background-color
+
+@function set-text-color($bg-color) {
+  @if lightness($bg-color) > 50 {
+    @return #222;
+  } @else {
+    @return #fff;
+  }
+}

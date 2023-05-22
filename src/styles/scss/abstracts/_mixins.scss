@@ -1,0 +1,263 @@
+@use "./functions" as f;
+@use "./paddings" as p;
+@use "./margins" as m;
+@use "./breakpoints" as b;
+@use "./colors" as c;
+
+// **********[ NAV-LINKS CONTAINER ]**********
+
+// navlinks-container-base ____define default styles
+
+@mixin nav-links-container-base($navbar-height: 60, $container-width: 100%) {
+  background: rgba(#fff, 0.98);
+  position: absolute;
+  right: 0;
+  top: f.px-rem($navbar-height);
+  width: $container-width;
+  transform: translateX(100%);
+  height: 0;
+  visibility: hidden;
+
+  @include b.mq-up(medium) {
+    position: unset;
+    visibility: visible;
+    transform: none;
+    height: auto !important;
+    background: transparent;
+  }
+}
+
+// **********[ NAV-LIST ]**********
+
+// navlist-base ____define default styles
+
+@mixin nav-list-base() {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: f.g(10);
+  padding: p.p(medium);
+
+  @include b.mq-up(medium) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: f.g(4);
+    padding: 0;
+  }
+}
+
+// **********[ SHOW NAV-LINKS ]**********
+
+// show-nav-links-base ____define default styles
+
+@mixin show-nav-links-base($navbar-height: f.px-rem(60)) {
+  visibility: visible;
+  height: calc(100vh - $navbar-height);
+  transform: translateX(0);
+  transition: transform 500ms ease-in-out;
+}
+
+// **********[ NAV-LINK ]**********
+
+// nav-links-base ____define default styles
+
+@mixin nav-link-base() {
+  text-transform: capitalize;
+  letter-spacing: f.ls(1);
+  padding: p.p(x-small) p.p(large);
+  color: c.color(link);
+
+  &:hover {
+    background: c.color(secondary, dark);
+    color: c.color(b-white);
+  }
+
+  @include b.mq-up(medium) {
+    padding: p.p(x-small) p.p(small);
+  }
+}
+
+// **********[ NAV-TOGGLE ]**********
+
+// nav-toggle-base ____define default styles
+
+@mixin nav-toggle-base() {
+  color: c.color(b-white);
+
+  &:hover {
+    scale: 1.1;
+    cursor: pointer;
+    transition: all 300ms;
+  }
+}
+
+// **********[ FLEX ]**********
+
+// flex-center ____define default styles with gap as argument
+
+@mixin flex-center($gap: base) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: f.g($gap);
+}
+
+// flex-row ____define default styles with gap as argument
+
+@mixin flex-row($gap: base) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: f.g($gap);
+}
+
+// flex-column ____define default styles with gap as argument
+
+@mixin flex-col($gap: base) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: f.g($gap);
+}
+
+// **********[ GRID ]**********
+
+// grid ____define default styles with row-gap as argument
+
+@mixin grid($r-gap: base) {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: f.g($r-gap);
+}
+// grid-justify-content-center ____define default styles with row-gap as argument
+
+@mixin grid-jc-center($r-gap: base) {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  row-gap: f.g($r-gap);
+}
+
+// grid-x-center ____define default styles with grid-template-columns (can be any valid arguments.. fractions, vw, % etc.) and row-gap as arguments
+
+@mixin grid-x-center($gtc: 1fr, $r-gap: base) {
+  display: grid;
+  grid-template-columns: $gtc;
+  justify-content: center;
+  row-gap: f.g($r-gap);
+}
+
+// grid-center ____define default styles with gap as argument
+
+@mixin grid-center($gap: base) {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: f.g($gap);
+}
+
+// grid-space-between ____define default styles with gap as argument
+
+@mixin grid-sb($gap: base) {
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  gap: f.g($gap);
+}
+
+// **********[ BORDER BOX SHADOW ]**********
+
+// border-box-shadow ____mixin should include thin border and should take $x, $y, $blurr values (in unitless pixels) and $color as arguments for box-shadow. pixel values will be processed using px-rem function to get corresponding rem values.
+
+@mixin border-box-shadow($x: 0, $y: 0, $blurr: 1, $color: rgba(#000, 0.1)) {
+  border: f.px-rem(0.75) solid rgba(#000, 0.1);
+  box-shadow: f.px-rem($x) f.px-rem($y) f.px-rem($blurr) $color;
+}
+
+// border-box-shadow-light ____mixin should include light border and should take $x, $y, $blurr values (in unitless pixels) and $color as arguments for box-shadow. pixel values will be processed using px-rem function to get corresponding rem values.
+
+@mixin border-box-shadow-light(
+  $x: 0,
+  $y: 0,
+  $blurr: 1,
+  $color: rgba(#000, 0.1)
+) {
+  border: f.px-rem(0.75) solid rgba(#000, 0.1);
+  box-shadow: f.px-rem($x) f.px-rem($y) f.px-rem($blurr) $color;
+}
+
+// border-box-shadow-medium ____mixin should include medium border and should take $x, $y, $blurr values (in unitless pixels) and $color as arguments for box-shadow. pixel values will be processed using px-rem function to get corresponding rem values.
+
+@mixin border-box-shadow-medium(
+  $x: 0,
+  $y: 2,
+  $blurr: 5,
+  $color: rgba(#000, 0.1)
+) {
+  border: f.px-rem(1) solid rgba(#000, 0.1);
+  box-shadow: f.px-rem($x) f.px-rem($y) f.px-rem($blurr) $color;
+}
+
+// border-box-shadow-large ____mixin should include medium border and large blurr values and should take $x, $y, $blurr values (in unitless pixels) and $color as arguments for box-shadow. pixel values will be processed using px-rem function to get corresponding rem values.
+
+@mixin border-box-shadow-medium(
+  $x: 1,
+  $y: 3,
+  $blurr: 10,
+  $color: rgba(#000, 0.1)
+) {
+  border: f.px-rem(1) solid rgba(#000, 0.1);
+  box-shadow: f.px-rem($x) f.px-rem($y) f.px-rem($blurr) $color;
+}
+
+// **********[ BOX SHADOW ]**********
+
+// box-shadow ____mixin should take $x, $y, $blurr values (in unitless pixels) and $color as arguments. pixel values will be processed using box-shadow function to get corresponding rem values.
+
+// uncomment the below original code of bs**************
+@mixin box-shadow($x: 1, $y: 3, $blurr: 5, $color: rgba(#000, 0.1)) {
+  box-shadow: f.px-rem($x) f.px-rem($y) f.px-rem($blurr) $color;
+}
+
+// **********[ COLOR THEME ]**********
+
+// theme-color ____set text-color based on background-color and it's lightness
+
+@mixin set-color-theme($bg-color) {
+  background: $bg-color;
+  color: f.set-text-color($bg-color);
+}
+
+// **********[ SLIDE-DOWN ON HOVER ]**********
+
+// slide-down on hover ____define mixin which should take from and to values of translateY in keyframes as arguments and return sliding down effect on hovering the element
+
+@mixin slide-down-on-hover($from: -1, $to: 5) {
+  @keyframes slide-down {
+    from {
+      transform: translateY(f.px-rem($from));
+    }
+    to {
+      transform: translateY(f.px-rem($to));
+    }
+  }
+
+  &:hover {
+    animation: slide-down 500ms ease forwards 100ms;
+    cursor: pointer;
+  }
+}
+
+// **********[ UNDERLINE ]**********
+
+//  underline ____define underline mixin which should take background-color as argument to include below titles.
+
+@mixin underline($bg-color: c.$primary-color) {
+  background: $bg-color;
+  width: f.px-rem(60);
+  height: f.px-rem(3);
+  margin-inline: auto;
+  margin-top: m.m(small);
+}

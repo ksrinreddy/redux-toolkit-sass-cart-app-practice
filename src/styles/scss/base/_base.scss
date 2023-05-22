@@ -1,0 +1,10 @@
+@use "../abstracts/" as a;
+@use "../components/" as c;
+@use "../layout/" as l;
+
+// globals
+
+body {
+  background: a.$bg-lightblue;
+  color: a.color(text-dark);
+}
